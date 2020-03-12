@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>{% block head_title %}{% endblock %}</title>
+    {% block extra_head %}
+     {% endblock %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Bootstrap styles -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet"/>
+    <!-- Customize styles -->
+    <link href="{% static 'style.css' %}" rel="stylesheet"/>
+    <!-- font awesome styles -->
+	<link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet">
+		<!--[if IE 7]>
+			<link href="{% static 'css/font-awesome-ie7.min.css' %}" rel="stylesheet">
+		<![endif]-->
+
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+	<!-- Favicons -->
+    <link rel="shortcut icon" href="{% static 'ico/favicon.ico' %}">
+  </head>
+<body>
+<!--
+	Upper Header Section
+-->
+<div class="navbar navbar-inverse navbar-fixed-top">
+	<div class="topNav">
+		<div class="container">
+			<div class="alignR">
+				<div class="pull-left socialNw">
+					<a href="#"><span class="icon-twitter"></span></a>
+					<a href="#"><span class="icon-facebook"></span></a>
+					<a href="#"><span class="icon-youtube"></span></a>
+					<a href="#"><span class="icon-tumblr"></span></a>
+				</div>
+				<a href="contact.html"><span class="icon-envelope"></span> Contact us</a>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!--
+Lower Header Section
+-->
+<div class="container">
+    <div id="gototop"> </div>
+<header id="header">
+<div class="row">
+    <h1>
+        <img src="{% static 'img/logo-bootstrap-shoping-cart.png' %}" alt="bootstrap sexy shop">
+	</h1>
+</div></header>
+
+
+<!--
+Navigation Bar Section
+-->
+<div class="navbar">
+	  <div class="navbar-inner">
+		<div class="container">
+		  <a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		  </a>
+		  <div class="nav-collapse">
+			<ul class="nav">
+			  <li class="active"><a href="index.html">Home	</a></li>
+			</ul>
+			<ul class="nav pull-right">
+                 {% if request.user.is_authenticated %}
+                  <li class="nav-item">
+                    <a href="{% url 'core:order-summary' %}" class="nav-link waves-effect">
+                      <span class="badge red z-depth-1 mr-1"> {{ request.user }} </span>
+                      <i class="fas fa-shopping-cart"></i>
+                      <span class="clearfix d-none d-sm-inline-block"> Cart </span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link waves-effect" href="{% url 'account_logout' %}">
+                      <span class="clearfix d-none d-sm-inline-block"> Logout </span>
+                    </a>
+                  </li>
+                  {% else %}
+                  <li class="nav-item">
+                    <a class="nav-link waves-effect" href="{% url 'account_login' %}">
+                      <span class="clearfix d-none d-sm-inline-block"> Login </span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link waves-effect" href="{% url 'account_signup' %}">
+                      <span class="clearfix d-none d-sm-inline-block"> Signup </span>
+                    </a>
+                  </li>
+                  {% endif %}
+			</ul>
+		  </div>
+		</div>
+	  </div>
+	</div>
+<!--
+Body Section
+-->
+<div class="row">
+
+    {% include 'side-bar.html' %}
+	{% block content %}
+    {% endblock content %}
+	</div>
+<!--
+Clients
+-->
+</div>
+{% block extra_body %}
+    {% endblock %}
+
+    {% include "footer.html" %}
+    {% include "scripts.html" %}
+  </body>
+</html>

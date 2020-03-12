@@ -1,0 +1,139 @@
+
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="span9">
+	<div class="well np">
+		<div id="myCarousel" class="carousel slide homCar">
+            <div class="carousel-inner">
+			  <div class="item">
+                <img style="width:100%" src="{% static 'img/bootstrap_free-ecommerce.png' %}" alt="bootstrap ecommerce templates">
+              </div>
+			  <div class="item">
+                <img style="width:100%" src="{% static 'img/carousel1.png' %}" alt="bootstrap ecommerce templates">
+              </div>
+			  <div class="item active">
+                <img style="width:100%" src="{% static 'img/carousel3.png' %}" alt="bootstrap ecommerce templates">
+              </div>
+              <div class="item">
+                <img style="width:100%" src="{% static 'img/bootstrap-templates.png' %}" alt="bootstrap templates">
+              </div>
+            </div>
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">&rsaquo;</a>
+          </div>
+        </div>
+<!--
+New Products
+-->
+	<div class="well well-small">
+	<h3>New Products </h3>
+	<hr class="soften"/>
+		<div class="row-fluid">
+		<div id="newProductCar" class="carousel slide">
+            <div class="carousel-inner">
+			<div class="item active">
+			  <ul class="thumbnails">
+				<li class="span3">
+				<div class="thumbnail">
+					<a class="zoomTool" href="#" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+					<a href="#" class="tag"></a>
+					<a href="#"><img src="{% static 'img/bootstrap-ring.png' %}" alt="bootstrap-ring"></a>
+				</div>
+				</li>
+				<li class="span3">
+				  <div class="thumbnail">
+					<a class="zoomTool" href="#" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+					<a href="#" class="tag"></a>
+					<a  href="#"><img src="{% static 'img/i.jpg' %}" alt=""></a>
+				  </div>
+				</li>
+				<li class="span3">
+				  <div class="thumbnail">
+					<a class="zoomTool" href="#" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+					<a href="#" class="tag"></a>
+					<a  href="#"><img src="{% static 'img/g.jpg' %}" alt=""></a>
+				  </div>
+				</li>
+				<li class="span3">
+				  <div class="thumbnail">
+					<a class="zoomTool"  title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+					<a  <img src="{% static 'img/s.png' %}" alt=""></a>
+				  </div>
+				</li>
+			  </ul>
+			  </div>
+		   <div class="item">
+		  <ul class="thumbnails">
+			<li class="span3">
+			  <div class="thumbnail">
+				<a class="zoomTool"  title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+				<a  ><img src="{% static 'img/i.jpg' %}" alt=""></a>
+			  </div>
+			</li>
+			<li class="span3">
+			  <div class="thumbnail">
+				<a class="zoomTool"  title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+				<a  ><img src="{% static 'img/f.jpg' %}" alt=""></a>
+			  </div>
+			</li>
+			<li class="span3">
+			  <div class="thumbnail">
+				<a class="zoomTool" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+				<a  ><img src="{% static 'img/h.jpg' %}" alt=""></a>
+			  </div>
+			</li>
+			<li class="span3">
+			  <div class="thumbnail">
+				<a class="zoomTool" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+				<a  ><img src="{% static 'img/j.jpg' %}" alt=""></a>
+			  </div>
+			</li>
+		  </ul>
+		  </div>
+		   </div>
+		  <a class="left carousel-control" href="#newProductCar" data-slide="prev">&lsaquo;</a>
+            <a class="right carousel-control" href="#newProductCar" data-slide="next">&rsaquo;</a>
+		  </div>
+		  </div>
+	</div>
+	<!--
+	Featured Products
+	-->
+		<div class="well well-small">
+		  <h3><a class="btn btn-mini pull-right" href="{{ item.get_absolute_url }}" title="View more">VIew More<span class="icon-plus"></span></a> Featured Products  </h3>
+		  <hr class="soften"/>
+		  <div class="row-fluid">
+		  <ul class="thumbnails">
+			  {% for item in object_list %}
+			<li class="span4">
+
+			  <div class="thumbnail">
+				<a class="zoomTool" href="{{ item.get_absolute_url }}" title="add to cart"><span class="icon-search"></span> QUICK VIEW</a>
+				<a  href="product_details.html"><img src="/media/{{item.image}}" alt=""></a>
+				<div class="caption">
+				  <h5>{{ item.title }}</h5>
+				  <h4>
+					  <a class="defaultBtn" href="{{ item.get_absolute_url }}"> <span class="icon-zoom-in"></span></a>
+					  <a class="shopBtn" href="{{item.get_add_to_cart_url }}" title="add to cart"><span class="icon-plus"></span></a>
+					  <span class="pull-right">
+                          {% if item.discount_price %}
+                          {{ item.discount_price }}
+                          {% else %}
+                          {{ item.price }}
+                          {% endif %}
+                      </span>
+				  </h4>
+				</div>
+			  </div>
+              {% endfor %}
+			</li>
+		  </ul>
+	</div>
+	</div>
+	</div>
+
+
+{% endblock content %}
+
+
